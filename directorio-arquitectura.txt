@@ -1,0 +1,54 @@
+cine-seat-reservation/
+├── src/
+│   ├── app/                         # App Router de Next.js
+│   │   ├── api/                     # Endpoints API (Backend BFF)
+│   │   │   ├── shows/
+│   │   │   │   └── [showId]/
+│   │   │   │       ├── seats/       # GET: Estado actual de asientos
+│   │   │   │       └── hold/        # POST: Crear bloqueo temporal (HOLD)
+│   │   │   └── webhooks/
+│   │   │       └── stripe/          # POST: Confirmar pagos asíncronos
+│   │   ├── checkout/
+│   │   │   └── page.tsx             # Pantalla de pago/resumen
+│   │   ├── page.tsx                 # Pantalla principal (Selección de asientos)
+│   │   ├── layout.tsx               # Layout raíz
+│   │   └── globals.css              # Estilos globales y Tailwind CSS
+│   │
+│   ├── components/                  # Componentes de UI (Frontend)
+│   │   ├── seat-map/
+│   │   │   ├── SeatMap.tsx          # Componente principal que armamos
+│   │   │   ├── SeatButton.tsx       # Subcomponente individual de asiento
+│   │   │   └── SeatLegend.tsx       # Leyenda de estados (Disponible, VIP, etc.)
+│   │   ├── checkout/
+│   │   │   └── ReservationTimer.tsx # Contador regresivo del bloqueo (10 min)
+│   │   └── ui/                      # Componentes reutilizables de diseño
+│   │       ├── Button.tsx
+│   │       └── Modal.tsx
+│   │
+│   ├── config/                      # Configuraciones estáticas y Mocks
+│   │   └── mockSeats.ts             # MOCK_SEAT_CONFIG para pruebas iniciales
+│   │
+│   ├── lib/                         # Clientes y utilidades del sistema
+│   │   ├── db.ts                    # Conexión a la BBDD (PostgreSQL / Supabase)
+│   │   ├── redis.ts                 # Conexión a Upstash Redis (gestión de Locks)
+│   │   ├── stripe.ts                # Cliente oficial de la pasarela de pagos
+│   │   └── utils.ts                 # Funciones helper (formato moneda, clases)
+│   │
+│   ├── services/                    # Lógica de negocio (Backend Domain)
+│   │   ├── seatService.ts           # Consultas de disponibilidad
+│   │   ├── reservationService.ts    # Lógica de bloqueos (locks) y expiración
+│   │   └── paymentService.ts        # Creación de sesiones de pago
+│   │
+│   └── types/                       # Interfaces y tipos de TypeScript
+│       ├── seats.ts                 # Tipos de Asiento, Estados y Grilla
+│       ├── reservation.ts           # Estado del Hold, Usuario y Transacción
+│       └── api.ts                   # Respuestas estándar de las APIs
+│
+├── public/                          # Recursos estáticos (Logos, SVGs, Favicon)
+├── .env.example                     # Plantilla de variables de entorno (Sin claves reales)
+├── .env.local                       # Variables de entorno locales (git-ignored)
+├── middleware.ts                    # Protección de rutas / CORS
+├── next.config.js                   # Configuración de Next.js
+├── tailwind.config.js               # Configuración de Tailwind CSS
+├── tsconfig.json                    # Configuración de TypeScript
+└── package.json                     # Dependencias del proyecto
