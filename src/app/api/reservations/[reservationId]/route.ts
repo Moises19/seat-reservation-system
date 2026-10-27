@@ -4,6 +4,9 @@ import { query } from '@/lib/db';
 import { ApiResponse } from '@/types/api';
 import QRCode from 'qrcode';
 
+// 🔴 Forzar a Next.js a tratar esta ruta como dinámica (no estática en el Build)
+export const dynamic = 'force-dynamic';
+
 export async function GET(
   request: Request,
   { params }: { params: { reservationId: string } }

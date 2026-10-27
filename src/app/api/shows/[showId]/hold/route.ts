@@ -2,6 +2,9 @@ import { NextResponse } from 'next/server';
 import { createSeatHold } from '@/services/reservationService';
 import { ApiResponse, CreateHoldRequest, CreateHoldResponse } from '@/types/api';
 
+// 🔴 Forzar a Next.js a tratar esta ruta como dinámica (no estática en el Build)
+export const dynamic = 'force-dynamic';
+
 export async function POST(
   request: Request,
   { params }: { params: { showId: string } }

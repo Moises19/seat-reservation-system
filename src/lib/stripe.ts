@@ -1,11 +1,13 @@
 // src/lib/stripe.ts
 import Stripe from 'stripe';
 
-if (!process.env.STRIPE_SECRET_KEY) {
-  throw new Error('⚠️ Falta la variable STRIPE_SECRET_KEY en el entorno.');
+const stripeSecretKey = process.env.STRIPE_SECRET_KEY || '';
+
+if (!stripeSecretKey && process.env.NODE_ENV === 'production') {
+  console.warn('⚠️ STRIPE_SECRET_KEY no está configurada en el entorno.');
 }
 
-export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
-  apiVersion: '2023-10-16', // Versión compatible con Next.js 14
+export const stripe = new Stripe(stripeSecretKey, {
+  apiVersion: '2023-10-16',
   typescript: true,
 });

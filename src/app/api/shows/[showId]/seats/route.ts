@@ -3,6 +3,9 @@ import { getSeatsByShow } from '@/services/seatService';
 import { ApiResponse } from '@/types/api';
 import { Seat } from '@/types/seats';
 
+// 🔴 Forzar a Next.js a tratar esta ruta como dinámica (no estática en el Build)
+export const dynamic = 'force-dynamic';
+
 export async function GET(
   request: Request,
   { params }: { params: { showId: string } }
